@@ -17,12 +17,13 @@ class HelloWorldComp extends React.Component {
     this.setState((prevState) => ({
       count: prevState.count + 1,
     }));
-    this.setState((prevState) => ({
-      count: prevState.count + 1,
-    }));
+    console.log(this.state.count);
   };
 
   render() {
+    if (this.state.count % 2 === 1) {
+      return <h1>This is a Book.</h1>;
+    }
     return (
       <div>
         <p>
@@ -34,9 +35,31 @@ class HelloWorldComp extends React.Component {
   }
 }
 
+function Car(props) {
+  const isHonda = props.isHonda;
+  const isToyota = props.isToyota;
+  let car;
+
+  if (isHonda) {
+    car = <h1>Honda</h1>;
+  }
+  if (isToyota) {
+    car = <h1>Toyota</h1>;
+  }
+  return (
+    <div>
+      <h1>This is band</h1>
+      {car ? car : <span>No Name</span>}
+    </div>
+  );
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <HelloWorldComp title={'Hello Component'} />
+    <Car isHonda={true} />
+    <Car isToyota={true} />
+    <Car isToyota={false} />
   </React.StrictMode>,
   document.getElementById('root')
 );
