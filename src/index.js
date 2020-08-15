@@ -4,7 +4,11 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 class Toggle extends React.Component {
-  state = { isToggleOn: false };
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: false };
+    this.handleClickEvent = this.handleClick.bind(this);
+  }
 
   handleClick = () => {
     this.setState((p) => ({ isToggleOn: !p.isToggleOn }));
@@ -12,7 +16,7 @@ class Toggle extends React.Component {
 
   render() {
     return (
-      <button onClick={this.handleClick}>
+      <button onClick={this.handleClickEvent}>
         {this.state.isToggleOn ? 'On' : 'Off'}
       </button>
     );
