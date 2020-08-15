@@ -24,22 +24,39 @@ class Toggle extends React.Component {
 }
 
 class InputComp extends React.Component {
-  state = {
-    name: 'input value ',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'input value ',
+    };
+  }
+
   onChange = (event) => {
-    console.log(event.target.value);
     const name = event.target.value;
     this.setState({ name });
   };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    alert(`Your name is ${this.state.name}`);
+  };
+
   render() {
-    return <input value={this.state.name} onChange={this.onChange}></input>;
+    const { name } = this.state;
+    const header = name ? <h1>Hello {name}</h1> : null;
+    return (
+      <form onSubmit={this.onSubmit}>
+        {header}
+        <input value={this.state.name} onChange={this.onChange}></input>
+      </form>
+    );
   }
 }
 
 ReactDOM.render(
   <React.StrictMode>
     <Toggle />
+    <br></br>
     <InputComp />
   </React.StrictMode>,
   document.getElementById('root')
