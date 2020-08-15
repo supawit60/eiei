@@ -20,7 +20,7 @@ class HelloWorldComp extends React.Component {
   render() {
     const numbers = [];
     for (let i = 1; i <= this.state.count; i++) {
-      numbers.push(<li>{i % 2 === 0 ? 'even' : 'odds'}</li>);
+      numbers.push(<li key={i}>{i % 2 === 0 ? 'even' : 'odds'}</li>);
     }
     return (
       <div>
@@ -39,12 +39,13 @@ function ItemList(props) {
   return (
     <ul>
       {props.numbers.map((n) => (
-        <li>{n}</li>
+        <li key={n}>{n}</li>
       ))}
     </ul>
   );
 }
 const numbers = [1, 2, 3, 4, 5];
+
 ReactDOM.render(
   <React.StrictMode>
     <HelloWorldComp title={'Hello Component'} />
