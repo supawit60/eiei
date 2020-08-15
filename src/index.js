@@ -3,27 +3,33 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-function Input({ onKeyUp }) {
-  return <input type="text" onKeyUp={onKeyUp} />;
+function Input({ onKeyPress }) {
+  return <input type="text" onKeyPress={onKeyPress} />;
 }
 
 class Form extends React.Component {
   state = { value: '' };
 
-  handleKeyUp = (e) => {
+  handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      this.setState({ value: e.target.value });
-      console.log(e.target.value.type);
+      this.setState({
+        value: e.target.value,
+      });
     }
   };
 
   render() {
     return (
       <section>
-        <Input onKeyUp={this.handleKeyUp} />
+        <Input onKeyPress={this.handleKeyPress} />
         <br />
         <ul>
           <li>{this.state.value}</li>
+          <li>
+            {Number.isNaN(Number(this.state.value))
+              ? 'Not Number'
+              : this.state.value}
+          </li>
         </ul>
       </section>
     );
