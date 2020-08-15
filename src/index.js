@@ -3,37 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-class Toggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isToggleOn: false };
-    this.handleClickEvent = this.handleClick.bind(this);
-  }
-
-  handleClick = () => {
-    this.setState((p) => ({ isToggleOn: !p.isToggleOn }));
-  };
-
-  render() {
-    return (
-      <button onClick={this.handleClickEvent}>
-        {this.state.isToggleOn ? 'On' : 'Off'}
-      </button>
-    );
-  }
-}
-
 class InputComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'input value ',
+      firstName: '',
+      lastName: '',
     };
   }
 
   onChange = (event) => {
-    const name = event.target.value;
-    this.setState({ name });
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({ [name]: value });
   };
 
   onSubmit = (event) => {
@@ -42,12 +24,25 @@ class InputComp extends React.Component {
   };
 
   render() {
-    const { name } = this.state;
+    const { firstName, lastName } = this.state;
+    const name = `${firstName} ${lastName}`.trim();
     const header = name ? <h1>Hello {name}</h1> : null;
     return (
       <form onSubmit={this.onSubmit}>
         {header}
-        <input value={this.state.name} onChange={this.onChange}></input>
+        <div>
+          <input
+            name="firstName"
+            value={this.state.fristName}
+            onChange={this.onChange}
+          ></input>
+          <br></br>
+          <input
+            name="lastName"
+            value={this.state.lastName}
+            onChange={this.onChange}
+          ></input>
+        </div>
       </form>
     );
   }
@@ -55,8 +50,6 @@ class InputComp extends React.Component {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Toggle />
-    <br></br>
     <InputComp />
   </React.StrictMode>,
   document.getElementById('root')
