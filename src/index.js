@@ -39,16 +39,19 @@ function ItemList(props) {
   return (
     <ul>
       {props.numbers.map((n) => (
-        <li key={n}>{n}</li>
+        <Item key={n} n={n} />
       ))}
     </ul>
   );
 }
 const numbers = [1, 2, 3, 4, 5];
 
+function Item(props) {
+  return <li>{props.n}</li>;
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <HelloWorldComp title={'Hello Component'} />
     <ItemList numbers={numbers} />
   </React.StrictMode>,
   document.getElementById('root')
