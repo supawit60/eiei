@@ -3,42 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-function Input({ onKeyPress }) {
-  return <input type="text" onKeyPress={onKeyPress} />;
-}
+class Toggle extends React.Component {
+  state = { isToggleOn: false };
 
-class Form extends React.Component {
-  state = { value: '' };
-
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.setState({
-        value: e.target.value,
-      });
-    }
-  };
+  handleClick() {
+    this.setState((p) => ({ isToggleOn: !p.isToggleOn }));
+  }
 
   render() {
     return (
-      <section>
-        <Input onKeyPress={this.handleKeyPress} />
-        <br />
-        <ul>
-          <li>{this.state.value}</li>
-          <li>
-            {Number.isNaN(Number(this.state.value))
-              ? 'Not Number'
-              : this.state.value}
-          </li>
-        </ul>
-      </section>
+      <button onClick={this.handleClick.bind(this)}>
+        {this.state.isToggleOn ? 'On' : 'Off'}
+      </button>
     );
   }
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Form />
+    <Toggle />
   </React.StrictMode>,
   document.getElementById('root')
 );
