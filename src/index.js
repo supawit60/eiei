@@ -20,16 +20,16 @@ class InputComp extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    alert(`Your name is ${this.state.name}`);
+    const { firstName, lastName } = this.state;
+    const name = `${firstName} ${lastName}`.trim();
+    if (this.props.handleName) {
+      this.props.handleName(name);
+    }
   };
 
   render() {
-    const { firstName, lastName } = this.state;
-    const name = `${firstName} ${lastName}`.trim();
-    const header = name ? <h1>Hello {name}</h1> : null;
     return (
       <form onSubmit={this.onSubmit}>
-        {header}
         <div>
           <input
             name="firstName"
@@ -42,15 +42,37 @@ class InputComp extends React.Component {
             value={this.state.lastName}
             onChange={this.onChange}
           ></input>
+          <br></br>
+          <button onSubmit={this.onSubmit}>submit</button>
         </div>
       </form>
     );
   }
 }
 
+class App extends React.Component {
+  state = {
+    name: '',
+  };
+  handleName = (name) => {
+    this.setState({ name });
+  };
+  render() {
+    const name = `${this.state.name}`.trim();
+    const header = name ? <h1>Hello {name}</h1> : null;
+
+    return (
+      <div>
+        {header}
+        <InputComp></InputComp>
+      </div>
+    );
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <InputComp />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
