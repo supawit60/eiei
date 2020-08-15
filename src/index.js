@@ -37,19 +37,19 @@ class HelloWorldComp extends React.Component {
 
 function Car(props) {
   const isHonda = props.isHonda;
-  const isToyota = props.isToyota;
+  // const isToyota = props.isToyota;
   let car;
 
   if (isHonda) {
     car = <h1>Honda</h1>;
   }
-  if (isToyota) {
-    car = <h1>Toyota</h1>;
-  }
+  // if (isToyota) {
+  //   car = <h1>Toyota</h1>;
+  // }
   return (
     <div>
       <h1>This is band</h1>
-      {car ? car : <span>No Name</span>}
+      {car && <h1>Honda</h1>}
     </div>
   );
 }
