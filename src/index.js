@@ -3,56 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-class HelloWorldComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
+function Input({ onKeyUp }) {
+  return <input type="text" onKeyUp={onKeyUp} />;
+}
 
-  onAdd = () => {
-    this.setState((prevState) => ({
-      count: prevState.count + 1,
-    }));
+class Form extends React.Component {
+  state = { value: '' };
+
+  handleKeyUp = (e) => {
+    if (e.key === 'Enter') {
+      this.setState({ value: e.target.value });
+      console.log(e.target.value.type);
+    }
   };
 
   render() {
-    const numbers = [];
-    for (let i = 1; i <= this.state.count; i++) {
-      numbers.push(<li key={i}>{i % 2 === 0 ? 'even' : 'odds'}</li>);
-    }
     return (
-      <div>
-        <button onClick={this.onAdd}>Add</button>
-        <ul>{numbers}</ul>
-      </div>
+      <section>
+        <Input onKeyUp={this.handleKeyUp} />
+        <br />
+        <ul>
+          <li>{this.state.value}</li>
+        </ul>
+      </section>
     );
   }
 }
 
-function ItemList(props) {
-  const items = [];
-  for (let i = 0; i < props.numbers.length; i++) {
-    items.push(<li>{i}</li>);
-  }
-  return (
-    <ul>
-      {props.numbers.map((n) => (
-        <Item key={n} n={n} />
-      ))}
-    </ul>
-  );
-}
-const numbers = [1, 2, 3, 4, 5];
-
-function Item(props) {
-  return <li>{props.n}</li>;
-}
-
 ReactDOM.render(
   <React.StrictMode>
-    <ItemList numbers={numbers} />
+    <Form />
   </React.StrictMode>,
   document.getElementById('root')
 );
