@@ -32,8 +32,28 @@ function Expresstion2() {
 // class //////////////////////////////////////////////
 // Class Component
 class HelloWorldComp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      title: 'XX',
+      etc: '',
+    };
+  }
+
+  onAdd = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
   render() {
-    return <h1>Hello World Class Component, {this.props.title}</h1>;
+    return (
+      <div>
+        <p>
+          {this.props.title} : {this.state.count}
+        </p>
+        <button onClick={this.onAdd}>Add</button>
+      </div>
+    );
   }
 }
 
