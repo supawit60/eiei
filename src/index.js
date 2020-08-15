@@ -6,13 +6,13 @@ import * as serviceWorker from './serviceWorker';
 class Toggle extends React.Component {
   state = { isToggleOn: false };
 
-  handleClick() {
+  handleClick = () => {
     this.setState((p) => ({ isToggleOn: !p.isToggleOn }));
-  }
+  };
 
   render() {
     return (
-      <button onClick={this.handleClick.bind(this)}>
+      <button onClick={this.handleClick}>
         {this.state.isToggleOn ? 'On' : 'Off'}
       </button>
     );
